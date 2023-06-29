@@ -27,3 +27,21 @@ export const getAllUsers = async (req: Request, res: Response) => {
     res.json({ message: "Failed to get users", error: error });
   }
 };
+
+export const deleteUser = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    await User.destroy({
+      where: {
+        id: id,
+      },
+    });
+
+    res
+      .status(200)
+      .json({ message: "User deleted successfully", success: true });
+  } catch (error) {
+    res.json({ message: "Failed to delete user", error: error });
+  }
+};
