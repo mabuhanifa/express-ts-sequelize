@@ -17,3 +17,13 @@ export const createUser = async (req: Request, res: Response) => {
     res.json({ message: "Failed to create user", error: error });
   }
 };
+
+export const getAllUsers = async (req: Request, res: Response) => {
+  try {
+    const users = await User.findAll();
+
+    res.status(200).json({ data: users, success: true });
+  } catch (error) {
+    res.json({ message: "Failed to get users", error: error });
+  }
+};
