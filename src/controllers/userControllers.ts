@@ -28,6 +28,22 @@ export const getAllUsers = async (req: Request, res: Response) => {
   }
 };
 
+export const getUser = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findOne({
+      where: {
+        id: id,
+      },
+    });
+
+    res.status(200).json({ data: user, success: true });
+  } catch (error) {
+    res.json({ message: "Failed to get user", error: error });
+  }
+};
+
 export const deleteUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
