@@ -1,8 +1,11 @@
-import * as dotenv from "dotenv";
-import { Sequelize } from "sequelize";
-dotenv.config();
+import sequelize from "./sequelize";
 
-const sequelize = new Sequelize(String(process.env.DB_URI));
+sequelize
+  .sync()
+  .then(() => {
+    console.log("Database & tables created!");
+  })
+  .catch((error) => console.log(error.message));
 
 const testDbConnection = async () => {
   try {

@@ -3,17 +3,17 @@ import User from "../models/User";
 
 export const createUser = async (req: Request, res: Response) => {
   try {
-    const { firstName, lastName } = req.body;
+    const { username, email } = req.body;
 
     // Create a new user in the database
+
     const user = await User.create({
-      firstName,
-      lastName,
+      username: username,
+      email: email,
     });
 
     res.status(201).json({ user });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Failed to create user" });
+    res.json({ message: "Failed to create user", error: error });
   }
 };

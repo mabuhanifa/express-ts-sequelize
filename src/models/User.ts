@@ -1,8 +1,7 @@
 import * as dotenv from "dotenv";
-import { DataTypes, Sequelize } from "sequelize";
+import { DataTypes } from "sequelize";
+import sequelize from "../config/sequelize";
 dotenv.config();
-
-const sequelize = new Sequelize(String(process.env.DB_URI));
 
 const User = sequelize.define(
   "User",
@@ -12,7 +11,7 @@ const User = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    firstName: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
