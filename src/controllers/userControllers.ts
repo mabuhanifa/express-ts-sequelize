@@ -61,3 +61,28 @@ export const deleteUser = async (req: Request, res: Response) => {
     res.json({ message: "Failed to delete user", error: error });
   }
 };
+
+export const updateUser = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { username, email } = req.body;
+
+    await User.update(
+      {
+        username: username,
+        email: email,
+      },
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
+
+    res
+      .status(200)
+      .json({ message: "User updated successfully", success: true });
+  } catch (error) {
+    res.json({ message: "Failed to update user", error: error });
+  }
+};
