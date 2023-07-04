@@ -1,33 +1,33 @@
-import { DataTypes, Sequelize } from "sequelize";
+import { DataTypes } from "sequelize";
 import sequelize from "../config/sequelize";
 import User from "./User";
 
-const Post = sequelize.define("Post", {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
+const Post = sequelize.define(
+  "Post",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
   },
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  content: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-  createdAt: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-  },
-  updatedAt: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-  },
-});
+  {
+    // Other model options go here
+    timestamps: true, // Enables timestamps (createdAt and updatedAt)
+    updatedAt: "updatedTimestamp", // Custom name for the updatedAt field
+    createdAt: "createdTimestamp", // Custom name for the createdAt field
+  }
+);
 
+User.hasMany(Post, { as: "posts", foreignKey: "userId" });
 Post.belongsTo(User, { as: "author", foreignKey: "userId" });
 
 export default Post;

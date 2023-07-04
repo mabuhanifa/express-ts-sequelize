@@ -1,7 +1,6 @@
 import * as dotenv from "dotenv";
 import { DataTypes } from "sequelize";
 import sequelize from "../config/sequelize";
-import Post from "./Post";
 dotenv.config();
 
 const User = sequelize.define(
@@ -28,7 +27,5 @@ const User = sequelize.define(
     createdAt: "createdTimestamp", // Custom name for the createdAt field
   }
 );
-
-User.hasMany(Post, { as: "posts", foreignKey: "userId" });
 
 export default User;
