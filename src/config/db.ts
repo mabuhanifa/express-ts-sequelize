@@ -7,7 +7,7 @@ sequelize
   })
   .catch((error) => console.log(error.message));
 
-const testDbConnection = async () => {
+const dbConnection = async () => {
   try {
     await sequelize.authenticate();
     console.log(
@@ -18,4 +18,4 @@ const testDbConnection = async () => {
   }
 };
 
-export default testDbConnection;
+export default dbConnection;
